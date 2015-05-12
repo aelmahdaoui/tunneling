@@ -10,7 +10,6 @@ program tunneling
 	real(8) :: k, alpha, P_total, t, delta_t
 	real(8), parameter :: pi = 4._8*datan(1._8)
 
-
 	call ReadInputFile
 	allocate ( PSI(N) )
 	allocate ( P(N) )
@@ -23,7 +22,7 @@ program tunneling
 	do while ( t <  10000*delta_t)
 		t = t + delta_t
 		call NextTimeStep
-		if (int(t/delta_t) == 100) then
+		if (int(t/delta_t) == 5000) then
 			call WriteWaveToFile		!Snapshot taken
 		end if
 	end do
@@ -35,6 +34,7 @@ contains
 	  	read(1,*), N
 		read(1,*), alpha
 		read(1,*), k
+		read(1,*), delta_t
 		close(1)
 	end subroutine
 	
@@ -62,7 +62,9 @@ contains
 	end subroutine
 
 	subroutine ApplyPotentialOperator
-		PSI(:) = exp(cmplx(0.0, -delta_t * V(:))) * PSI(:)
+		do i=1,N
+			PSI(i) = exp(cmplx(0.0, -delta_t * V(i))) * PSI(i)
+		end do
 	end subroutine
 
 	subroutine ApplyFourierTransform
