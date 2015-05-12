@@ -14,7 +14,6 @@ LINK = $(FC) $(LDFLAGS)
 
 
 OBJS = 
-OBJS += modules.o
 OBJS += tunneling.o
 
 
