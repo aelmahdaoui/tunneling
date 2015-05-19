@@ -22,7 +22,7 @@ program tunneling
 	do while ( t <  10000*delta_t)
 		t = t + delta_t
 		call NextTimeStep
-		if (int(t/delta_t) == 5000) then
+		if (int(t/delta_t) == 3000) then
 			call WriteWaveToFile		!Snapshot taken
 		end if
 	end do
